@@ -47,7 +47,7 @@ public void setConnectionFactory(ConnectionFactory connectionFactory) {
 			PreparedStatement statement = connection.prepareStatement(INSERT_QUERY);
 			statement.setString(1, user.getFirstName());
 			statement.setString(2,user.getLastName() );
-			statement.setDate(3,new Date(user.getDateOfBirthd().getTime()) );
+			statement.setDate(3,new Date(user.getDateOfBirth().getTime()) );
 			int n = statement.executeUpdate();
 			if(n!=1){
 				throw new DatabaseException("Number of the inserted rows: "+ n);
@@ -79,7 +79,7 @@ public void setConnectionFactory(ConnectionFactory connectionFactory) {
 	                    .prepareStatement(UPDATE_QUERY);
 	            statement.setString(1, user.getFirstName());
 	            statement.setString(2, user.getLastName());
-	            statement.setDate(3, new Date(user.getDateOfBirthd().getTime()));
+	            statement.setDate(3, new Date(user.getDateOfBirth().getTime()));
 	            statement.setLong(4, user.getId().longValue());
 	            int n = statement.executeUpdate();
 	            if (n != 1) {
@@ -128,7 +128,7 @@ public void setConnectionFactory(ConnectionFactory connectionFactory) {
 	            result.setId(new Long(resultSet.getLong(1)));
 	            result.setFirstName(resultSet.getString(2));
 	            result.setLastName(resultSet.getString(3));
-	            result.setDateOfBirthd(resultSet.getDate(4));
+	            result.setDateOfBirth(resultSet.getDate(4));
 	            resultSet.close();
 	            statement.close();
 	            connection.close();
@@ -152,7 +152,7 @@ public void setConnectionFactory(ConnectionFactory connectionFactory) {
 			user.setId(new Long(resultSet.getLong(1)));
 			user.setFirstName(resultSet.getString(2));
 			user.setLastName(resultSet.getString(3));
-			user.setDateOfBirthd(resultSet.getDate(4));
+			user.setDateOfBirth(resultSet.getDate(4));
 			result.add(user);
 		}
 		resultSet.close();
@@ -181,7 +181,7 @@ public void setConnectionFactory(ConnectionFactory connectionFactory) {
                user.setId(new Long(resultSet.getLong(1)));
                user.setFirstName(resultSet.getString(2));
                user.setLastName(resultSet.getString(3));
-               user.setDateOfBirthd(resultSet.getDate(4));
+               user.setDateOfBirth(resultSet.getDate(4));
                result.add(user);
            }
            resultSet.close();

@@ -2,6 +2,7 @@ package KN_14_5_Serbina.usermanagement.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.Properties;
 
 public class ConnectionFactoryImpl implements ConnectionFactory {
 
@@ -25,6 +26,13 @@ public class ConnectionFactoryImpl implements ConnectionFactory {
 		this.url = "jdbc:hsqldb:file:db/usermanagement"; 
 		this.user = "sa"; 
 		this.password = "";
+	}
+
+	public ConnectionFactoryImpl(Properties properties) {
+		user = properties.getProperty("connection.user");
+		password = properties.getProperty("connection.password");
+		url = properties.getProperty("connection.url");
+		driver = properties.getProperty("connection.driver");
 	}
 
 	@Override

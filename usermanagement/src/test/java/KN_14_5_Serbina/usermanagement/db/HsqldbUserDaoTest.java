@@ -19,8 +19,8 @@ import org.dbunit.dataset.xml.XmlDataSet;
 import org.junit.Before;
 import org.junit.Test;
 
-import junit.framework.TestCase;
 import KN_14_5_Serbina.usermanagement.User;
+import junit.framework.TestCase;
 
 public class HsqldbUserDaoTest extends DatabaseTestCase {
 
@@ -48,13 +48,13 @@ public class HsqldbUserDaoTest extends DatabaseTestCase {
 		            Date newDate = new Date(1922,11,11);
 		            user.setFirstName(newFirstName);
 		            user.setLastName(newLastName);
-		            user.setDateOfBirthd(newDate);
+		            user.setDateOfBirth(newDate);
 		            
 		            dao.update(user);
 		            user = dao.find(user.getId());
 		            assertEquals("Firstname fail", newFirstName, user.getFirstName());
 		            assertEquals("Lastname fail", newLastName, user.getLastName());
-		            assertEquals("Date fail", newDate, user.getDateOfBirthd());
+		            assertEquals("Date fail", newDate, user.getDateOfBirth());
 		        } catch (DatabaseException e) {
 		            e.printStackTrace();
 		            fail(e.toString());
@@ -78,22 +78,29 @@ public class HsqldbUserDaoTest extends DatabaseTestCase {
 	    public void testFind() {
 	        try {
 	        	long id=2L;
-	        	String newFirstName = "George";
-	            String newLastName = "Bush";
+	        	 String newFirstName = "Max";
+	            String newLastName = "Brooks";
+	            //Calendar cal = Calendar.getInstance();
+	           // cal.add(1972,Calendar.NOVEMBER,17);
+	           // SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+	           // String formatted = format1.format(cal.getTime());
 	            Calendar calendar = Calendar.getInstance();
-	            calendar.set(1949, Calendar.AUGUST, 17);
+	            calendar.set(1972, Calendar.NOVEMBER, 17);
+	            //DateFormat format = DateFormat.getInstance();
+	        	//Date date = format.parse("1972-11-17");
 	            User user = dao.find(id);
+	            //String formatted = format1.format(cal.getTime());
 	            assertEquals("Firstname fail", newFirstName, user.getFirstName());
 	            assertEquals("Lastname fail", newLastName, user.getLastName());
 	            Calendar calendarFind = Calendar.getInstance();
-	            calendarFind.setTime(user.getDateOfBirthd());
+	            calendarFind.setTime(user.getDateOfBirth());
 	            assertEquals("Year fail", calendar.get(Calendar.YEAR), calendarFind.get(Calendar.YEAR));
 	            assertEquals("Month fail", calendar.get(Calendar.MONTH), calendarFind.get(Calendar.MONTH));
 	            assertEquals("Day fail", calendar.get(Calendar.DAY_OF_MONTH), calendarFind.get(Calendar.DAY_OF_MONTH));
 	        } catch (DatabaseException e) {
 	            e.printStackTrace();
 	            fail(e.toString());
-	        }
+	        } 
 	        long id = 3L;
 	        try {
 	            dao.find(id);   
@@ -103,7 +110,6 @@ public class HsqldbUserDaoTest extends DatabaseTestCase {
 	        }
 	    }
 		
-		@Test
 		public void testFindAll(){
 	try {
 		Collection collection = dao.findAll();
@@ -121,7 +127,7 @@ public class HsqldbUserDaoTest extends DatabaseTestCase {
 			User user = new User();
 			 user.setFirstName("John");
 			 user.setLastName("Doe");
-			 user.setDateOfBirthd(new Date(1907,5,3));
+			 user.setDateOfBirth(new Date(1907,5,3));
 			 assertNull(user.getId());
 			 user = dao.create(user);
 			 assertNotNull(user);
@@ -146,6 +152,7 @@ public class HsqldbUserDaoTest extends DatabaseTestCase {
 		IDataSet dataSet = new XmlDataSet(getClass().getClassLoader().getResourceAsStream("usersDataSet.xml"));
 			return dataSet;
 		}
+
 
 
 }
